@@ -1,5 +1,5 @@
 # pritesh-shendekar-demo
-Build a basic lightning component that can query a list of 10 most recently created accounts and display it using a lightning app. 
+2)Build a basic lightning component that can query a list of 10 most recently created accounts and display it using a lightning app. 
 ------------------------------------------------------------------------------------------------
 AccountList.cls (Apex Controller):
 public class AccountController {
@@ -54,4 +54,28 @@ AccountList.js-meta-xml (js-meta-xml Lightning Component):
 	</targets>
 </LightningComponentBundle>
 ---------------------------------------------------------------------------------------------------------------
-Auther -Pritesh Shendekar
+3)Make a basic http callout and print the result using system.debug
+
+public class HttpCalloutExample {
+    public void makeHttpCallout() {
+        Http http = new Http();
+        HttpRequest req = new HttpRequest();
+        HttpResponse res = new HttpResponse();
+        
+        req.setEndpoint('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
+        req.setMethod('GET');
+        
+        try {
+            res = http.send(req);
+            if (res.getStatusCode() == 200) {
+                String responseBody = res.getBody();
+                System.debug('HTTP Response: ' + responseBody);
+            } else {
+                System.debug('HTTP Request failed with status code: ' + res.getStatusCode());
+            }
+        } catch (Exception e) {
+            System.debug('HTTP Request failed with exception: ' + e.getMessage());
+        }
+    }
+}
+
