@@ -1,15 +1,16 @@
 # pritesh-shendekar-demo
 
--------------------------------------------------------------------------------------------------------
-AccountController.cls (Apex Controller):
+------------------------------------------------------------------------------------------------
+AccountList.cls (Apex Controller):
 public class AccountController {
     @AuraEnabled
     public static List<Account> getRecentAccounts() {
         return [SELECT Id, Name FROM Account ORDER BY CreatedDate DESC LIMIT 10];
     }
 }
+
 -----------------------------------------------------------------------------------------------------
-AccountList.cmp (http Lightning Component):
+AccountList.html (html Lightning Component):
 <aura:component controller="AccountController">
     <aura:attribute name="accounts" type="Account[]" />
     
@@ -20,7 +21,7 @@ AccountList.cmp (http Lightning Component):
             <li>{!acc.Name}</li>
         </aura:iteration>
     </ul>
-</aura:component>
+    </aura:component>
 ------------------------------------------------------------------------------------------------------
 AccountList.js (js Lightning Component):
 <template>
@@ -35,10 +36,10 @@ AccountList.js (js Lightning Component):
                 component.set("v.accounts", response.getReturnValue());
             }
         })
-        $A.enqueueAction(action);   
-      
-}
-})
+        $A.enqueueAction(action); 
+	}
+ })
+ 
 </template>
 ------------------------------------------------------------------------------------------------------------
 AccountList.js-meta-xml (js-meta-xml Lightning Component):
@@ -52,5 +53,5 @@ AccountList.js-meta-xml (js-meta-xml Lightning Component):
 		<target>lightning__HomePage</target>
 	</targets>
 </LightningComponentBundle>
-
+---------------------------------------------------------------------------------------------------------------
 Auther -Pritesh Shendekar
